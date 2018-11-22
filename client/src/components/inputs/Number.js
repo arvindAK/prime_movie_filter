@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 
-const date = new Date();
-const year = date.getFullYear();
-
 class Number extends Component {
   constructor(props) {
     super(props);

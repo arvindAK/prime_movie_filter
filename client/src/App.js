@@ -11,7 +11,6 @@ class App extends Component {
   this.state = {
     movies:       [],
     showFilter:   false,
-    limit:        40,
     offset:       40,
     imdb:         7,
     year:         '',
@@ -26,9 +25,6 @@ class App extends Component {
 
   componentDidMount() {
     this.handleSubmit();
-    // fetch('/users')
-    //   .then(res => res.json())
-    //   .then(result => this.setState({ movies: result.rows }));
   };
 
   handleChange = (key, value) => {
@@ -42,7 +38,6 @@ class App extends Component {
   showMore = () => {
     let query = this.buildQuery();
     query += `&offset=${this.state.offset}`
-    console.log(query)
     this.setState({ offset: this.state.offset + 40 })
     fetch(query)
       .then(res => res.json())
@@ -56,9 +51,8 @@ class App extends Component {
       star_rating:  this.state.star_rating,
       star_count:   this.state.star_count,
       genre:        this.state.genre,
-      limit:        this.state.limit,
     };
-    let query = `/users/filter?`;
+    let query = `/api/movies?`;
     query += Object.keys(params)
       .filter(a => typeof params[a] !== 'undefined')
       .map(k => `${k}=${params[k]}`)
